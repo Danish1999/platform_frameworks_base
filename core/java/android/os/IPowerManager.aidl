@@ -88,4 +88,7 @@ interface IPowerManager
 
     // Custom API
     void rebootCustom(boolean confirm, String reason, boolean wait);
+
+    // blocked wakelock support
+    String getSeenWakeLocks();
 }
