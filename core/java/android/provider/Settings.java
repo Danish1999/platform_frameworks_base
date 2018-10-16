@@ -5177,15 +5177,18 @@ public final class Settings {
          * Whether the proximity sensor will adjust call to speaker
          */
         public static final String PROXIMITY_AUTO_SPEAKER = "proximity_auto_speaker";
+
          /**
          * Time delay to activate speaker after proximity sensor triggered
          */
         public static final String PROXIMITY_AUTO_SPEAKER_DELAY = "proximity_auto_speaker_delay";
+
          /**
          * Whether the proximity sensor will adjust call to speaker,
          * only while in call (not while ringing on outgoing call)
          */
         public static final String PROXIMITY_AUTO_SPEAKER_INCALL_ONLY = "proximity_auto_speaker_incall_only";
+
          /**
          * Whether the use proximity sensor for answering incoming ring
          */
@@ -6255,6 +6258,19 @@ public final class Settings {
                 ANY_STRING_VALIDATOR;
 
         /**
+         * 0 - Default
+         * 1 - Round with ring
+         * 2 - Two-toned round with ring
+         * 3 - Squircle with ring
+         * @hide
+         */
+        public static final String QS_TILE_STYLE = "qs_tile_style";
+
+        /** @hide */
+        private static final Validator QS_TILE_STYLE_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -6423,6 +6439,7 @@ public final class Settings {
             OMNI_STATUS_BAR_FILE_HEADER_IMAGE,
             QS_QUICKBAR_COLUMNS,
             QS_LAYOUT_ROWS_LANDSCAPE,
+            QS_TILE_STYLE,
         };
 
         /**
@@ -6604,6 +6621,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(POCKET_JUDGE);
             PRIVATE_SETTINGS.add(LOCK_SHOW_STATUS_BAR);
             PRIVATE_SETTINGS.add(NOTIFICATION_GUTS_KILL_APP_BUTTON);
+            PRIVATE_SETTINGS.add(QS_TILE_STYLE);
             PRIVATE_SETTINGS.add(SCREEN_OFF_ANIMATION);
             PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_STYLE);
@@ -6804,6 +6822,7 @@ public final class Settings {
             VALIDATORS.put(POCKET_JUDGE, POCKET_JUDGE_VALIDATOR);
             VALIDATORS.put(LOCK_SHOW_STATUS_BAR,LOCK_SHOW_STATUS_BAR_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_GUTS_KILL_APP_BUTTON, NOTIFICATION_GUTS_KILL_APP_BUTTON_VALIDATOR);
+            VALIDATORS.put(QS_TILE_STYLE, QS_TILE_STYLE_VALIDATOR);
             VALIDATORS.put(SCREEN_OFF_ANIMATION, SCREEN_OFF_ANIMATION_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_CLOCK, STATUS_BAR_CLOCK_VALIDATOR);
             VALIDATORS.put(STATUSBAR_CLOCK_STYLE, STATUSBAR_CLOCK_STYLE_VALIDATOR);
