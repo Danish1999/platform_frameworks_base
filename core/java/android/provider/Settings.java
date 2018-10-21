@@ -6105,6 +6105,20 @@ public final class Settings {
 	public static final String STATUS_BAR_LOGO_COLOR = "status_bar_logo_color";
 
         /**
+         * Change font size for the system lockscreen date
+         *
+         * @hide
+         */
+        public static final String LOCKDATE_FONT_SIZE= "lockdate_font_size";
+
+        /**
+         * Change font size for the system lockscreen clock widget
+         *
+         * @hide
+         */
+        public static final String LOCKCLOCK_FONT_SIZE = "lockclock_font_size";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
