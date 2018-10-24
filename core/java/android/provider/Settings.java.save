@@ -4785,22 +4785,6 @@ public final class Settings {
         public static final Validator DISPLAY_TEMPERATURE_DAY_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 100000);
 
-
-        /**
-         * Whether footer #DerpFest text shows
-         * @hide
-         */
-        public static final String OMNI_FOOTER_TEXT_SHOW = "omni_footer_text_show";
-         /** @hide */
-        private static final Validator OMNI_FOOTER_TEXT_SHOW_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * QS footer text
-         * @hide
-         */
-        public static final String X_FOOTER_TEXT_STRING = "x_footer_text_string";
-
         /**
          * Color temperature of the display at night
          */
@@ -6035,20 +6019,6 @@ public final class Settings {
         public static final String SETTINGS_SPACER = "settings_spacer";
 
 
-	/**
-	 ** Change fonts for the system lockscreen Owner info
-	 **
-	 ** @hide
-	 **/
-        public static final String LOCK_OWNERINFO_FONTS = "lock_ownerinfo_fonts";
-
-        /**
-	 ** Change font size for the system lockscreen owner
-	 **
-	 ** @hide
-	 **/
-        public static final String LOCKOWNER_FONT_SIZE= "lockowner_font_size";
-
         /**
          * Enable blocking wakelock
          * @hide
@@ -6089,48 +6059,6 @@ public final class Settings {
 	 ** @hide
 	 **/
         public static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
-
-        /**
-         * Change fonts for the system lockscreen date
-         *
-         * @hide
-         */
-        public static final String LOCK_DATE_FONTS = "lock_date_fonts";
-
-
-
-        /**
-         * 0 = off
-	 * 1 = left
-	 * 2 = right
-         */
-        public static final String STATUS_BAR_LOGO = "status_bar_logo";
-
-        /**
-	 ** Statusbar logo Style
-	 ** @hide
-	 **/
-	 public static final String STATUS_BAR_LOGO_STYLE = "status_bar_logo_style";
-
-	/**
-	 ** Statusbar logo Color
-	 ** @hide
-         **/
-	public static final String STATUS_BAR_LOGO_COLOR = "status_bar_logo_color";
-
-        /**
-         * Change font size for the system lockscreen date
-         *
-         * @hide
-         */
-        public static final String LOCKDATE_FONT_SIZE= "lockdate_font_size";
-
-        /**
-         * Change font size for the system lockscreen clock widget
-         *
-         * @hide
-         */
-        public static final String LOCKCLOCK_FONT_SIZE = "lockclock_font_size";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -6490,7 +6418,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(SENSOR_BLOCK);
             PRIVATE_SETTINGS.add(DOZE_ON_CHARGE);
             PRIVATE_SETTINGS.add(FORCE_SHOW_NAVBAR);
-            PRIVATE_SETTINGS.add(STATUS_BAR_LOGO);
         }
 
         /**
@@ -15958,11 +15885,11 @@ public final class Settings {
         private static final Validator POWER_BUTTON_VERY_LONG_PRESS_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
 
-        /**
+        /**  
          * AOKP Custom System Animations
          * @hide
-         */
-        public static final String[] ACTIVITY_ANIMATION_CONTROLS = new String[] {
+         */  
+        public static final String[] ACTIVITY_ANIMATION_CONTROLS = new String[] {  
                 "activity_open",
                 "activity_close",
                 "task_open",
