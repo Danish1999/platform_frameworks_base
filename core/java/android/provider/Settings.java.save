@@ -131,7 +131,7 @@ public final class Settings {
      */
     @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
     public static final String SCREEN_STABILIZATION_SETTINGS = "android.settings.SCREEN_STABILIZATION";
-
+    
     /**
      * Activity Action: Show settings to allow configuration of APNs.
      * <p>
@@ -3374,7 +3374,7 @@ public final class Settings {
             "bluetooth_discoverability";
 
         private static final Validator BLUETOOTH_DISCOVERABILITY_VALIDATOR =
-                new SettingsValidators.InclusiveIntegerRangeValidator(0, 6);
+                new SettingsValidators.InclusiveIntegerRangeValidator(0, 2);
 
         /**
          * Bluetooth discoverability timeout.  If this value is nonzero, then
@@ -4785,22 +4785,6 @@ public final class Settings {
         public static final Validator DISPLAY_TEMPERATURE_DAY_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 100000);
 
-
-        /**
-         * Whether footer #DerpFest text shows
-         * @hide
-         */
-        public static final String OMNI_FOOTER_TEXT_SHOW = "omni_footer_text_show";
-         /** @hide */
-        private static final Validator OMNI_FOOTER_TEXT_SHOW_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * QS footer text
-         * @hide
-         */
-        public static final String X_FOOTER_TEXT_STRING = "x_footer_text_string";
-
         /**
          * Color temperature of the display at night
          */
@@ -5628,7 +5612,7 @@ public final class Settings {
          * @hide
          */
         public static final String STATUS_BAR_QUICK_QS_PULLDOWN = "status_bar_quick_qs_pulldown";
-
+	
 	/**
          * Status bar carrier label
          * 0: Hide
@@ -5729,14 +5713,17 @@ public final class Settings {
          */
         public static final String FOD_ICON = "fod_icon";
 
-        /** @hide */
-        private static final Validator FOD_ICON_VALIDATOR = ANY_STRING_VALIDATOR;
-
         /**
          * Whether to vibrate on notifications
          * @hide
          */
         public static final String VIBRATE_ON_NOTIFICATIONS = "vibrate_on_notifications";
+
+        /**
+         * FOD pressed state
+         * @hide
+         */
+        public static final String FOD_PRESSED_STATE = "fod_pressed_state";
 
         /**
          * Use doubletap as doze pulse triggers
@@ -5770,7 +5757,7 @@ public final class Settings {
 
         /** @hide */
         private static final Validator QS_BACKGROUND_BLUR_INTENSITY_VALIDATOR = ANY_INTEGER_VALIDATOR;
-
+	
 	/**
          * @hide
          */
@@ -6025,36 +6012,12 @@ public final class Settings {
         private static final Validator NOTIFICATION_HEADERS_VALIDATOR = BOOLEAN_VALIDATOR;
 
 
-         * FOD pressed state
-         * @hide
-         */
-        public static final String FOD_PRESSED_STATE = "fod_pressed_state";
-
-        /** @hide */
-        private static final Validator FOD_PRESSED_STATE_VALIDATOR =
-                new SettingsValidators.InclusiveIntegerRangeValidator(0, 6);
-
-
         /**
          * Some creation simillar to samsung OneUI
          * @hide
          */
         public static final String SETTINGS_SPACER = "settings_spacer";
 
-
-	/**
-	 ** Change fonts for the system lockscreen Owner info
-	 **
-	 ** @hide
-	 **/
-        public static final String LOCK_OWNERINFO_FONTS = "lock_ownerinfo_fonts";
-
-        /**
-	 ** Change font size for the system lockscreen owner
-	 **
-	 ** @hide
-	 **/
-        public static final String LOCKOWNER_FONT_SIZE= "lockowner_font_size";
 
         /**
          * Enable blocking wakelock
@@ -6081,7 +6044,6 @@ public final class Settings {
         public static final String ALARM_BLOCKING_ENABLED = "alarm_blocking_enabled";
 
         /**
-         * Which Vibration Pattern to use
          * 0: dzzz-dzzz
          * 1: dzzz-da
          * 2: mm-mm-mm
@@ -6092,60 +6054,11 @@ public final class Settings {
         public static final String RINGTONE_VIBRATION_PATTERN = "ringtone_vibration_pattern";
 
         /**
-         * Sensor blocked packages
-         * @hide
-         */
-        public static final String SENSOR_BLOCKED_APP = "sensor_blocked_app";
-        public static final String SENSOR_BLOCKED_APP_DUMMY = "sensor_blocked_app_dummy";
-
-        /**
 	 ** Change fonts for the system lockscreen clock widget
 	 **
 	 ** @hide
 	 **/
         public static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
-
-        /**
-         * Change fonts for the system lockscreen date
-         *
-         * @hide
-         */
-        public static final String LOCK_DATE_FONTS = "lock_date_fonts";
-
-
-
-        /**
-         * 0 = off
-	 * 1 = left
-	 * 2 = right
-         */
-        public static final String STATUS_BAR_LOGO = "status_bar_logo";
-
-        /**
-	 ** Statusbar logo Style
-	 ** @hide
-	 **/
-	 public static final String STATUS_BAR_LOGO_STYLE = "status_bar_logo_style";
-
-	/**
-	 ** Statusbar logo Color
-	 ** @hide
-         **/
-	public static final String STATUS_BAR_LOGO_COLOR = "status_bar_logo_color";
-
-        /**
-         * Change font size for the system lockscreen date
-         *
-         * @hide
-         */
-        public static final String LOCKDATE_FONT_SIZE= "lockdate_font_size";
-
-        /**
-         * Change font size for the system lockscreen clock widget
-         *
-         * @hide
-         */
-        public static final String LOCKCLOCK_FONT_SIZE = "lockclock_font_size";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -6287,8 +6200,6 @@ public final class Settings {
             TINT_QS_TILES,
             FORCE_SHOW_NAVBAR,
             NOTIFICATION_HEADERS,
-            FOD_ICON,
-            FOD_PRESSED_STATE,
         };
 
         /**
@@ -6507,7 +6418,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(SENSOR_BLOCK);
             PRIVATE_SETTINGS.add(DOZE_ON_CHARGE);
             PRIVATE_SETTINGS.add(FORCE_SHOW_NAVBAR);
-            PRIVATE_SETTINGS.add(STATUS_BAR_LOGO);
         }
 
         /**
@@ -6700,8 +6610,6 @@ public final class Settings {
             VALIDATORS.put(TINT_QS_TILES, TINT_QS_TILES_VALIDATOR);
             VALIDATORS.put(FORCE_SHOW_NAVBAR, FORCE_SHOW_NAVBAR_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_HEADERS, NOTIFICATION_HEADERS_VALIDATOR);
-            VALIDATORS.put(FOD_ICON, FOD_ICON_VALIDATOR);
-            VALIDATORS.put(FOD_PRESSED_STATE, FOD_PRESSED_STATE_VALIDATOR);
         }
 
         /**
@@ -15977,11 +15885,11 @@ public final class Settings {
         private static final Validator POWER_BUTTON_VERY_LONG_PRESS_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
 
-        /**
+        /**  
          * AOKP Custom System Animations
          * @hide
-         */
-        public static final String[] ACTIVITY_ANIMATION_CONTROLS = new String[] {
+         */  
+        public static final String[] ACTIVITY_ANIMATION_CONTROLS = new String[] {  
                 "activity_open",
                 "activity_close",
                 "task_open",
