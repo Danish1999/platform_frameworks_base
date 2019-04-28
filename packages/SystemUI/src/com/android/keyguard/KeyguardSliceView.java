@@ -48,6 +48,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
@@ -99,6 +100,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
     @VisibleForTesting
     TextView mTitle;
     TextView mSubTitle;
+    private RelativeLayout mRowContainer;
     private Row mRow;
     private int mTextColor;
     private float mDarkAmount = 0;
@@ -152,6 +154,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         super.onFinishInflate();
         mTitle = findViewById(R.id.title);
         mSubTitle = findViewById(R.id.subTitle);
+        mRowContainer = findViewById(R.id.row_maincenter);
         mRow = findViewById(R.id.row);
         mTextColor = Utils.getColorAttrDefaultColor(mContext, R.attr.wallpaperTextColor);
         mIconSize = mRowTextSize;
@@ -264,9 +267,6 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         final int blendedColor = getTextColor();
         final int startIndex = mHasHeader ? 1 : 0; // First item is header; skip it
         mRow.setVisibility(subItemsCount > 0 ? VISIBLE : GONE);
-        LinearLayout.LayoutParams layoutParams = (LayoutParams) mRow.getLayoutParams();
-        layoutParams.topMargin = mHasHeader ? mRowWithHeaderPadding : mRowPadding;
-        mRow.setLayoutParams(layoutParams);
 
         for (int i = startIndex; i < subItemsCount; i++) {
             RowContent rc = (RowContent) subItems.get(i);
@@ -355,6 +355,18 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
                 ((Button) v).setTextColor(blendedColor);
             }
         }
+    }
+
+    public void setViewBackground(Drawable drawRes) {
+        mRow.setBackground(drawRes);
+    }
+
+    public void setViewBackgroundResource(int drawRes) {
+        mRow.setBackgroundResource(drawRes);
+    }
+
+    public void setViewPadding(int left, int top, int right, int bottom) {
+        mRow.setPadding(left,top,right,bottom);
     }
 
     @Override
