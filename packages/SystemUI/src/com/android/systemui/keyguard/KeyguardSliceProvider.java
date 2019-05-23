@@ -73,6 +73,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import com.android.internal.util.syberia.OmniJawsClient;
+
 /**
  * Simple Slice provider that shows the current date.
  */
