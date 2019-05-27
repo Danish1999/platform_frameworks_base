@@ -543,6 +543,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private VisualizerView mVisualizerView;
 
+    private boolean mChargingAnimation;
+
     private final BroadcastReceiver mWallpaperChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -4367,7 +4369,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.CENTER_TEXT_CLOCK),
                     false, this, UserHandle.USER_ALL);
-	}
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION),
+                    false, this, UserHandle.USER_ALL);
+        }
 
          @Override
         public void onChange(boolean selfChange, Uri uri) {
@@ -4383,6 +4388,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     uri.equals(Settings.Secure.getUriFor(Settings.Secure.LOCKSCREEN_DATE_SELECTION)) ||
                     uri.equals(Settings.Secure.getUriFor(Settings.Secure.CENTER_TEXT_CLOCK))) {
                 updateKeyguardStatusSettings();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION))) {
+                updateChargingAnimation();
             }
             update();
         }
@@ -4403,7 +4411,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             setGestureNavOptions();
             updateNavigationBar(false);
             updateKeyguardStatusSettings();
-        }
+            updateChargingAnimation();
+       }
     }
 
     private void setMediaHeadsup() {
@@ -4440,6 +4449,16 @@ public class StatusBar extends SystemUI implements DemoMode,
                 UserHandle.USER_CURRENT) == 1;
         mNotificationInterruptionStateProvider.setUseLessBoringHeadsUp(lessBoringHeadsUp);
     }
+
+
+    private void updateChargingAnimation() {
+        mChargingAnimation = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_CHARGING_ANIMATION, 1, UserHandle.USER_CURRENT) == 1;
+        if (mKeyguardIndicationController != null) {
+            mKeyguardIndicationController.updateChargingIndication(mChargingAnimation);
+        }
+    }
+
 
     private void setGamingMode() {
         mGamingModeActivated = Settings.System.getIntForUser(mContext.getContentResolver(),
