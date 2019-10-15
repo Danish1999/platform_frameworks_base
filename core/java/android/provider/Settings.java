@@ -4955,10 +4955,10 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /** @hide */
-        public static final String OMNI_QS_LAYOUT_ROWS = "qs_layout_rows";
+        public static final String QS_LAYOUT_ROWS = "qs_layout_rows";
 
         /** @hide */
-        private static final Validator OMNI_QS_LAYOUT_ROWS_VALIDATOR =
+        private static final Validator QS_LAYOUT_ROWS_VALIDATOR =
                 ANY_INTEGER_VALIDATOR;
         /**
          * @hide
@@ -5279,9 +5279,14 @@ public final class Settings {
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 2);
 
         /**
-         * Whether to show seconds next to clock in status bar
-         * 0 - hide (default)
-         * 1 - show
+        * @hide
+        */
+        public static final String QS_LAYOUT_ROWS_LANDSCAPE = "qs_layout_rows_landscape";
+
+        /** @hide */
+        private static final Validator QS_LAYOUT_ROWS_LANDSCAPE_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * @hide
          */
         public static final String STATUS_BAR_CLOCK_SECONDS = "status_bar_clock_seconds";
@@ -6348,7 +6353,7 @@ public final class Settings {
             OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE,
             OMNI_QS_LAYOUT_COLUMNS,
             OMNI_QS_TILE_TITLE_VISIBILITY,
-            OMNI_QS_LAYOUT_ROWS,
+            QS_LAYOUT_ROWS,
             OMNIJAWS_WEATHER_ICON_PACK,
             OMNI_LOCKSCREEN_WEATHER_ENABLED,
             AICP_LOCKSCREEN_WEATHER_STYLE,
@@ -6417,6 +6422,7 @@ public final class Settings {
             OMNI_STATUS_BAR_CUSTOM_HEADER_IMAGE,
             OMNI_STATUS_BAR_FILE_HEADER_IMAGE,
             QS_QUICKBAR_COLUMNS
+            QS_LAYOUT_ROWS_LANDSCAPE,
         };
 
         /**
@@ -6573,7 +6579,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE);
             PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS);
             PRIVATE_SETTINGS.add(OMNI_QS_TILE_TITLE_VISIBILITY);
-            PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_ROWS);
+            PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS);
             PRIVATE_SETTINGS.add(OMNIJAWS_WEATHER_ICON_PACK);
             PRIVATE_SETTINGS.add(OMNI_LOCKSCREEN_WEATHER_ENABLED);
             PRIVATE_SETTINGS.add(AICP_LOCKSCREEN_WEATHER_STYLE);
@@ -6643,6 +6649,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_STATUS_BAR_CUSTOM_HEADER_PROVIDER);
             PRIVATE_SETTINGS.add(OMNI_STATUS_BAR_CUSTOM_HEADER_IMAGE);
             PRIVATE_SETTINGS.add(OMNI_STATUS_BAR_FILE_HEADER_IMAGE);
+            PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS_LANDSCAPE);
             PRIVATE_SETTINGS.add(QS_QUICKBAR_COLUMNS);
         }
 
@@ -6774,7 +6781,7 @@ public final class Settings {
                     OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR);
             VALIDATORS.put(OMNI_QS_LAYOUT_COLUMNS, OMNI_QS_LAYOUT_COLUMNS_VALIDATOR);
             VALIDATORS.put(OMNI_QS_TILE_TITLE_VISIBILITY, OMNI_QS_TILE_TITLE_VISIBILITY_VALIDATOR);
-            VALIDATORS.put(OMNI_QS_LAYOUT_ROWS, OMNI_QS_LAYOUT_ROWS_VALIDATOR);
+            VALIDATORS.put(QS_LAYOUT_ROWS, QS_LAYOUT_ROWS_VALIDATOR);
             VALIDATORS.put(OMNIJAWS_WEATHER_ICON_PACK, OMNIJAWS_WEATHER_ICON_PACK_VALIDATOR);
             VALIDATORS.put(OMNI_LOCKSCREEN_WEATHER_ENABLED,
                     OMNI_LOCKSCREEN_WEATHER_ENABLED_VALIDATOR);
@@ -6853,6 +6860,7 @@ public final class Settings {
                     OMNI_STATUS_BAR_CUSTOM_HEADER_IMAGE_VALIDATOR);
             VALIDATORS.put(OMNI_STATUS_BAR_FILE_HEADER_IMAGE,
                     OMNI_STATUS_BAR_FILE_HEADER_IMAGE_VALIDATOR);
+            VALIDATORS.put(QS_LAYOUT_ROWS_LANDSCAPE, QS_LAYOUT_ROWS_LANDSCAPE_VALIDATOR);
             VALIDATORS.put(QS_QUICKBAR_COLUMNS, QS_QUICKBAR_COLUMNS_VALIDATOR);
         }
 

@@ -4315,6 +4315,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_ROWS),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_ROWS_LANDSCAPE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DISPLAY_CUTOUT_HIDDEN),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
