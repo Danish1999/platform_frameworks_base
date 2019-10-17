@@ -4785,6 +4785,16 @@ public final class Settings {
         public static final Validator DISPLAY_TEMPERATURE_DAY_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 100000);
 
+
+        /**
+         * Whether footer #DerpFest text shows
+         * @hide
+         */
+        public static final String OMNI_FOOTER_TEXT_SHOW = "omni_footer_text_show";
+         /** @hide */
+        private static final Validator OMNI_FOOTER_TEXT_SHOW_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
         /**
          * Color temperature of the display at night
          */
