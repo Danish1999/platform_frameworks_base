@@ -51,5 +51,8 @@
     <dimen name="dismiss_all_button_margin_top">30dp</dimen>
     <dimen name="dismiss_all_button_width">55dp</dimen>
     <dimen name="dismiss_all_fab_src_size">24dp</dimen>
+    <!-- The width/height of the charging indicator view on keyguard. -->
+    <dimen name="keyguard_charging_indication_height">60dp</dimen>
+    <dimen name="keyguard_charging_indication_width">32dp</dimen>
 
 </resources>
