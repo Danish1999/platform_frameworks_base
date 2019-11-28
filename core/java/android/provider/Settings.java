@@ -4796,6 +4796,12 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
+         * QS footer text
+         * @hide
+         */
+        public static final String X_FOOTER_TEXT_STRING = "x_footer_text_string";
+
+        /**
          * Color temperature of the display at night
          */
         public static final String DISPLAY_TEMPERATURE_NIGHT = "display_temperature_night";
