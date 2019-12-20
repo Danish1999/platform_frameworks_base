@@ -25,6 +25,5 @@
             android:paddingStart="50dp"
             android:paddingBottom="@dimen/title_clock_padding"
             android:textAlignment="viewStart"
-            style="@style/widget_big"
-            android:textSize="40dp" />
+            style="@style/widget_big" />
 </com.android.keyguard.clock.ClockLayout>

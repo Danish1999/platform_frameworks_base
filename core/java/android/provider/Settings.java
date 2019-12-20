@@ -5353,6 +5353,21 @@ public final class Settings {
         public static final String ANIM_TILE_INTERPOLATOR = "anim_tile_interpolator";
 
         /**
+         ** Change fonts for the system lockscreen clock widget
+         **
+         ** @hide
+         **/
+        public static final String CUSTOM_TEXT_CLOCK_FONTS = "custom_text_clock_fonts";
+
+        /**
+         * Change font size for the lockscreen text clock widget
+         *
+         * @hide
+         */
+        public static final String CUSTOM_TEXT_CLOCK_FONT_SIZE = "custom_text_clock_font_size";
+
+
+        /**
          * Whether to show the kill app button in notification guts
          *
          * @hide
