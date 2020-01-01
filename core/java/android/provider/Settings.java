@@ -5971,7 +5971,6 @@ public final class Settings {
         private static final Validator NOTIFICATION_HEADERS_VALIDATOR = BOOLEAN_VALIDATOR;
 
 
-        /**
          * FOD pressed state
          * @hide
          */
@@ -5980,6 +5979,14 @@ public final class Settings {
         /** @hide */
         private static final Validator FOD_PRESSED_STATE_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 6);
+
+
+        /**
+         * Some creation simillar to samsung OneUI
+         * @hide
+         */
+        public static final String SETTINGS_SPACER = "settings_spacer";
+
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
