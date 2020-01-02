@@ -4348,6 +4348,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.FORCE_SHOW_NAVBAR),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.LOCKSCREEN_CLOCK_SELECTION),
+                    false, this, UserHandle.USER_ALL);
         }
          @Override
         public void onChange(boolean selfChange, Uri uri) {
@@ -4359,6 +4362,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                 if (mQSPanel != null) {
                     mQSPanel.getHost().reloadAllTiles();
                 }
+            } else if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.LOCKSCREEN_CLOCK_SELECTION))) {
+                updateKeyguardStatusSettings();
             }
             update();
         }
@@ -4378,6 +4383,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
             setGestureNavOptions();
             updateNavigationBar(false);
+            updateKeyguardStatusSettings();
         }
     }
 
@@ -4401,6 +4407,11 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setHeadsUpBlacklist() {
         if (mPresenter != null)
             mPresenter.setHeadsUpBlacklist();
+    }
+
+
+    private void updateKeyguardStatusSettings() {
+        mNotificationPanel.updateKeyguardStatusSettings();
     }
 
 
