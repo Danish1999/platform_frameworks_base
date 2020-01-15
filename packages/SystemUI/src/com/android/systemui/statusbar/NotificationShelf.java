@@ -170,7 +170,6 @@ public class NotificationShelf extends ActivatableNotificationView implements
         updateBackgroundColors();
     }
 
-
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
