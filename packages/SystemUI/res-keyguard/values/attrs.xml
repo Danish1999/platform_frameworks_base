@@ -38,5 +38,13 @@
         <attr name="android:textColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="CustomAnalogClock">
+        <attr name="custom_dial" format="reference"/>
+        <attr name="custom_hand_hour" format="reference"/>
+        <attr name="custom_hand_minute" format="reference"/>
+        <attr name="custom_clock_dial_ambient" format="reference"/>
+    </declare-styleable>
+
+
     <attr name="passwordStyle" format="reference" />
 </resources>
