@@ -24,4 +24,5 @@
     <color name="analog_clock_bg_color">#303030</color>
     <color name="accent_device_default_light">@*android:color/accent_device_default_light</color>
 
+    <color name="analog_clock_hand_hour_color">@*android:color/accent_device_default_light</color>
 </resources>
