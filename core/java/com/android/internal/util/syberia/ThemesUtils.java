@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-/**
- * Copyright (c) 2018, The Android Open Source Project
+/*
+ * Copyright (C) 2014 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
--->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Hexagon icon overlay -->
-    <string name="icon_shape_hexagon_overlay">Шестиугольник</string>
 
-    <!-- Themes -->
-    <color name="theme_generic_semi_transparent_color">#EAFFFFFF</color>
+package com.android.internal.util.xtended;
 
-</resources>
+public class ThemesUtils {
+
+    public static final String[] SOLARIZED_DARK = {
+            "com.android.theme.solarizeddark.system",
+            "com.android.theme.solarizeddark.systemui",
+    };
+}
+
