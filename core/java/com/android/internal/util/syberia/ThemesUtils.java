@@ -32,5 +32,10 @@ public class ThemesUtils {
             "com.android.theme.chocox.system",
             "com.android.theme.chocox.systemui",
     };
+
+    public static final String[] DARK_GREY = {
+            "com.android.theme.darkgrey.system",
+            "com.android.theme.darkgrey.systemui",
+    };
 }
 
