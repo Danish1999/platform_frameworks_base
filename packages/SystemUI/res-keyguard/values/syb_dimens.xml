@@ -198,5 +198,7 @@
     <dimen name="lock_clock_font_size_108">108dp</dimen>
 
     <dimen name="header_font_size">20dp</dimen>
+    <dimen name="clock_oronos_outline_size">4dp</dimen>
+
 
 </resources>
