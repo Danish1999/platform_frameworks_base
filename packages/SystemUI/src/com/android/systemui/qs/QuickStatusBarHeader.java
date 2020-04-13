@@ -170,6 +170,12 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.OMNI_STATUS_BAR_CUSTOM_HEADER), false,
                     this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.OMNI_STATUS_BAR_CUSTOM_HEADER_IMAGE), false,
+                    this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.OMNI_STATUS_BAR_FILE_HEADER_IMAGE), false,
+                    this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -182,6 +188,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     // omni additions start
     private boolean mLandscape;
     private boolean mHeaderImageEnabled;
+    private String mCustomHeaderImage;
+    private String mCustomHeaderFile;
 
     private class OmniSettingsObserver extends ContentObserver {
         OmniSettingsObserver(Handler handler) {
@@ -445,9 +453,11 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         /*mHeaderTextContainerView.getLayoutParams().height =
                 resources.getDimensionPixelSize(R.dimen.qs_header_tooltip_height);
         mHeaderTextContainerView.setLayoutParams(mHeaderTextContainerView.getLayoutParams());*/
+        boolean headerImageSelected = mHeaderImageEnabled &&
+                (mCustomHeaderImage != null || mCustomHeaderFile != null);
 
         int topMargin = resources.getDimensionPixelSize(
-                com.android.internal.R.dimen.quick_qs_offset_height) + (mHeaderImageEnabled ?
+                com.android.internal.R.dimen.quick_qs_offset_height) + (headerImageSelected ?
                 resources.getDimensionPixelSize(R.dimen.qs_header_image_offset) : 0);
 
         mSystemIconsView.getLayoutParams().height = topMargin;
@@ -460,7 +470,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             int qsHeight = resources.getDimensionPixelSize(
                     com.android.internal.R.dimen.quick_qs_total_height);
 
-            if (mHeaderImageEnabled) {
+            if (headerImageSelected) {
                 qsHeight += resources.getDimensionPixelSize(R.dimen.qs_header_image_offset);
             }
 
@@ -761,6 +771,12 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mHeaderImageEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
                 Settings.System.OMNI_STATUS_BAR_CUSTOM_HEADER, 0,
                 UserHandle.USER_CURRENT) == 1;
+        mCustomHeaderImage = Settings.System.getStringForUser(getContext().getContentResolver(),
+                Settings.System.OMNI_STATUS_BAR_CUSTOM_HEADER_IMAGE,
+                UserHandle.USER_CURRENT);
+        mCustomHeaderFile = Settings.System.getStringForUser(getContext().getContentResolver(),
+                Settings.System.OMNI_STATUS_BAR_FILE_HEADER_IMAGE,
+                UserHandle.USER_CURRENT);
         updateQSBatteryMode();
         updateSBBatteryStyle();
         updateStatusbarProperties();
