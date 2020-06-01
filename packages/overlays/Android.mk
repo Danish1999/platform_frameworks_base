@@ -29,24 +29,16 @@ LOCAL_REQUIRED_MODULES := \
 	DisplayCutoutEmulationTallOverlay \
 	FontAclonicaSourceOverlay \
 	FontAmaranteSourceOverlay \
-	FontAntipastoProSourceOverlay \
 	FontBariolSourceOverlay \
 	FontCagliostroSourceOverlay \
 	FontComicSansSourceOverlay \
 	FontCoolstorySourceOverlay \
-	FontEvolveSansSourceOverlay \
-	FontFucekSourceOverlay \
 	FontGoogleSansSourceOverlay \
-	FontGoogleSansMediumSourceOverlay \
 	FontLGSmartGothicSourceOverlay \
-	FontLemonMilkSourceOverlay \
 	FontNotoSerifSourceOverlay \
-	FontOdudaSourceOverlay \
 	FontOneplusSlateSource \
-	FontReemKufiSourceOverlay \
 	FontRosemarySourceOverlay \
 	FontSamsungOneSourceOverlay \
-	FontSimpleDaySourceOverlay \
 	FontSonySketchSourceOverlay \
 	FontSurferSourceOverlay \
 	FontNokiaPureSourceOverlay \
