@@ -26,8 +26,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextClock;
 
-import androidx.core.graphics.ColorUtils;
-
 import com.android.internal.colorextraction.ColorExtractor;
 import com.android.systemui.R;
 import com.android.systemui.colorextraction.SysuiColorExtractor;
@@ -66,12 +64,13 @@ public class AnalogClockController implements ClockPlugin {
     private ClockLayout mBigClockView;
     private ImageClock mAnalogClock;
 
-    private int mHourColor;
-    private int mMinuteColor;
-    private int mBackgroundColor;
+    /**
+     * Helper to extract colors from wallpaper palette for clock face.
+     */
+    private final ClockPalette mPalette = new ClockPalette();
 
     /**
-     * Create a AnalogClockController instance.
+     * Create a BubbleClockController instance.
      *
      * @param res Resources contains title and thumbnail.
      * @param inflater Inflater used to inflate custom clock views.
@@ -87,10 +86,6 @@ public class AnalogClockController implements ClockPlugin {
     private void createViews() {
         mBigClockView = (ClockLayout) mLayoutInflater.inflate(R.layout.analog_clock, null);
         mAnalogClock = mBigClockView.findViewById(R.id.analog_clock);
-        mHourColor = mResources.getColor(R.color.analog_clock_hour_color);
-        mMinuteColor = mResources.getColor(R.color.analog_clock_minute_color);
-        mBackgroundColor = mResources.getColor(R.color.analog_clock_bg_color);
-        mAnalogClock.setClockColors(mHourColor, mMinuteColor);
     }
 
     @Override
@@ -122,6 +117,7 @@ public class AnalogClockController implements ClockPlugin {
 
         // Initialize state of plugin before generating preview.
         setDarkAmount(1f);
+        setTextColor(Color.WHITE);
         ColorExtractor.GradientColors colors = mColorExtractor.getColors(
                 WallpaperManager.FLAG_LOCK);
         setColorPalette(colors.supportsDarkText(), colors.getColorPalette());
@@ -150,10 +146,19 @@ public class AnalogClockController implements ClockPlugin {
 
     @Override
     public void setTextColor(int color) {
+        updateColor();
     }
 
     @Override
     public void setColorPalette(boolean supportsDarkText, int[] colorPalette) {
+        mPalette.setColorPalette(supportsDarkText, colorPalette);
+        updateColor();
+    }
+
+    private void updateColor() {
+        final int primary = mPalette.getPrimaryColor();
+        final int secondary = mPalette.getSecondaryColor();
+        mAnalogClock.setClockColors(primary, secondary);
     }
 
     @Override
@@ -164,15 +169,7 @@ public class AnalogClockController implements ClockPlugin {
 
     @Override
     public void setDarkAmount(float darkAmount) {
-        int hourColor = ColorUtils.blendARGB(mHourColor, Color.WHITE, darkAmount);
-        int minuteColor = ColorUtils.blendARGB(mMinuteColor, Color.WHITE, darkAmount);
-        if (darkAmount == 1f) {
-            mAnalogClock.setBackgroundResource(R.drawable.analog_clock_background_dark);
-        } else {
-            mAnalogClock.setBackgroundResource(R.drawable.analog_clock_background);
-        }
-
-        mAnalogClock.setClockColors(hourColor, minuteColor);
+        mPalette.setDarkAmount(darkAmount);
         mBigClockView.setDarkAmount(darkAmount);
     }
 
