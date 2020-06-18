@@ -115,6 +115,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
     private static final int MESSAGE_DISABLE = 2;
     private static final int MESSAGE_REGISTER_ADAPTER = 20;
     private static final int MESSAGE_UNREGISTER_ADAPTER = 21;
+    private static final int MESSAGE_INFORM_ADAPTER_SERVICE_UP = 22;
     private static final int MESSAGE_REGISTER_STATE_CHANGE_CALLBACK = 30;
     private static final int MESSAGE_UNREGISTER_STATE_CHANGE_CALLBACK = 31;
     private static final int MESSAGE_BLUETOOTH_SERVICE_CONNECTED = 40;
@@ -164,6 +165,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
     private final ReentrantReadWriteLock mBluetoothLock = new ReentrantReadWriteLock();
     private boolean mBinding;
     private boolean mUnbinding;
+    private boolean mTryBindOnBindTimeout = false;
 
     private BluetoothAirplaneModeListener mBluetoothAirplaneModeListener;
 
@@ -429,6 +431,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
         mBluetoothBinder = null;
         mBluetoothGatt = null;
         mBinding = false;
+        mTryBindOnBindTimeout = false;
         mUnbinding = false;
         mEnable = false;
         mState = BluetoothAdapter.STATE_OFF;
@@ -1154,6 +1157,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                 mContext.unbindService(mConnection);
                 mUnbinding = false;
                 mBinding = false;
+                mTryBindOnBindTimeout = false;
             } else {
                 mUnbinding = false;
             }
@@ -1496,6 +1500,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
      */
     private void sendBluetoothServiceUpCallback() {
         try {
+            mBluetoothLock.writeLock().lock();
             int n = mCallbacks.beginBroadcast();
             Slog.d(TAG, "Broadcasting onBluetoothServiceUp() to " + n + " receivers.");
             for (int i = 0; i < n; i++) {
@@ -1507,6 +1512,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
             }
         } finally {
             mCallbacks.finishBroadcast();
+            mBluetoothLock.writeLock().unlock();
         }
     }
 
@@ -1802,13 +1808,20 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                     break;
 
                 case MESSAGE_REGISTER_ADAPTER: {
+                    if (DBG) Slog.d(TAG,"MESSAGE_REGISTER_ADAPTER");
                     IBluetoothManagerCallback callback = (IBluetoothManagerCallback) msg.obj;
                     mCallbacks.register(callback);
                     break;
                 }
                 case MESSAGE_UNREGISTER_ADAPTER: {
+                    if (DBG) Slog.d(TAG,"MESSAGE_UNREGISTER_ADAPTER");
                     IBluetoothManagerCallback callback = (IBluetoothManagerCallback) msg.obj;
                     mCallbacks.unregister(callback);
+                    break;
+                }
+                case MESSAGE_INFORM_ADAPTER_SERVICE_UP: {
+                    if (DBG) Slog.d(TAG,"MESSAGE_INFORM_ADAPTER_SERVICE_UP");
+                    sendBluetoothServiceUpCallback();
                     break;
                 }
                 case MESSAGE_REGISTER_STATE_CHANGE_CALLBACK: {
@@ -1858,6 +1871,7 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                         } // else must be SERVICE_IBLUETOOTH
 
                         mBinding = false;
+                        mTryBindOnBindTimeout = false;
                         mBluetoothBinder = service;
                         mBluetooth = IBluetooth.Stub.asInterface(Binder.allowBlocking(service));
 
@@ -1876,7 +1890,9 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                             Slog.e(TAG, "Unable to register BluetoothCallback", re);
                         }
                         //Inform BluetoothAdapter instances that service is up
-                        sendBluetoothServiceUpCallback();
+                        Message informMsg =
+                                    mHandler.obtainMessage(MESSAGE_INFORM_ADAPTER_SERVICE_UP);
+                        mHandler.sendMessage(informMsg);
 
                         //Do enable request
                         try {
@@ -2028,6 +2044,15 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
                     mBluetoothLock.writeLock().lock();
                     mBinding = false;
                     mBluetoothLock.writeLock().unlock();
+                    // Ensure try BIND for one more time
+                    if(!mTryBindOnBindTimeout) {
+                        Slog.e(TAG, " Trying to Bind again");
+                        mTryBindOnBindTimeout = true;
+                        handleEnable(mQuietEnable);
+                    } else {
+                        Slog.e(TAG, "Bind trails excedded");
+                        mTryBindOnBindTimeout = false;
+                    }
                     break;
                 }
                 case MESSAGE_TIMEOUT_UNBIND: {
