@@ -11219,7 +11219,7 @@ public final class Settings {
             VOLUME_LINK_NOTIFICATION,
             LOCKSCREEN_VISUALIZER_ENABLED,
             AWARE_TAP_PAUSE_GESTURE_COUNT,
-            AWARE_TAP_PAUSE_TOUCH_COUNT
+            AWARE_TAP_PAUSE_TOUCH_COUNT,
             HIDE_LOCKICON,
         };
 
