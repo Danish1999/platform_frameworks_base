@@ -180,9 +180,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     }
     private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
 
-    // omni additions start
-    private boolean mLandscape;
-    private boolean mHeaderImageEnabled;
 
     private class OmniSettingsObserver extends ContentObserver {
         OmniSettingsObserver(Handler handler) {
