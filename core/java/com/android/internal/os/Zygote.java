@@ -259,6 +259,9 @@ public final class Zygote {
             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, "PostFork");
         }
 
+        // Set the Java Language thread priority to the default value for new apps.
+        Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
+
         ZygoteHooks.postForkCommon();
         return pid;
     }
@@ -301,6 +304,9 @@ public final class Zygote {
 
         // Note that this event ends at the end of handleChildProc.
         Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, "PostFork");
+
+        // Set the Java Language thread priority to the default value for new apps.
+        Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
 
         /*
          * This is called here (instead of after the fork but before the specialize) to maintain
@@ -355,6 +361,9 @@ public final class Zygote {
         if (pid == 0) {
             Trace.setTracingEnabled(true, runtimeFlags);
         }
+
+        // Set the Java Language thread priority to the default value for new apps.
+        Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
 
         ZygoteHooks.postForkCommon();
         return pid;
@@ -642,7 +651,6 @@ public final class Zygote {
 
             disableExecuteOnly(args.mTargetSdkVersion);
 
-            // End of the postFork event.
             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
 
             return ZygoteInit.zygoteInit(args.mTargetSdkVersion,
