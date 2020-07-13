@@ -6421,7 +6421,7 @@ public final class Settings {
             OMNI_STATUS_BAR_CUSTOM_HEADER_PROVIDER,
             OMNI_STATUS_BAR_CUSTOM_HEADER_IMAGE,
             OMNI_STATUS_BAR_FILE_HEADER_IMAGE,
-            QS_QUICKBAR_COLUMNS
+            QS_QUICKBAR_COLUMNS,
             QS_LAYOUT_ROWS_LANDSCAPE,
         };
 

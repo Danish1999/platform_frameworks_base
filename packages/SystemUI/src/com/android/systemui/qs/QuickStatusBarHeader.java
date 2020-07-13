@@ -475,9 +475,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 qsHeight += resources.getDimensionPixelSize(R.dimen.qs_header_image_offset);
             }
 
-            // always add the margin below the statusbar with or without image
-            qsHeight += statusBarBottomMargin;
-            lp.height = Math.max(getMinimumHeight(), qsHeight);
         }
 
         setLayoutParams(lp);

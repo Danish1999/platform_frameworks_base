@@ -22,6 +22,7 @@ import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
+import android.content.ContentResolver;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
